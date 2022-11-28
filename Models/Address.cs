@@ -3,18 +3,22 @@ namespace VetManager.Models;
 public class Address
 {
     public int Id { get; set; }
+    public string ZipCode { get; set; }
     public string Street { get; set; }
+    public string Number { get; set; }
     public string District { get; set; }
     public string City { get; set; }
-    public string ZipCode { get; set; }
+    public string State { get; set; }
 
     public Address() { }
 
-    public Address(int id, string street, string district, string city, string zipCode) {
+    public Address(int id, string zipCode, string street, string number, string district, string city, string state) {
         Id = id;
+        ZipCode = zipCode;
         Street = street;
+        Number = number;
         District = district;
         City = city;
-        ZipCode = zipCode;
+        State = state;
     }
 }

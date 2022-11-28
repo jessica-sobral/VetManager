@@ -1,0 +1,48 @@
+@model IEnumerable<VetManager.Models.Address>
+
+@{
+    ViewData["Title"] = "Endereços";
+}
+
+<h1 class="mb-4">@ViewData["Title"]</h1>
+
+@if (Model.Count() == 0)
+{
+    <p>Nenhum endereço cadastrado.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">CEP</th>
+                <th scope="col">Rua</th>
+                <th scope="col">Número</th>
+                <th scope="col">Bairro</th>
+                <th scope="col">Cidade</th>
+                <th scope="col">Estado</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody class="table-group-divider">
+            @foreach (var address in Model)
+            {
+                <tr>
+                    <th scope="row">@address.Id</th>
+                    <td>@address.ZipCode</td>
+                    <td>@address.Street</td>
+                    <td>@address.Number</td>
+                    <td>@address.District</td>
+                    <td>@address.City</td>
+                    <td>@address.State</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
