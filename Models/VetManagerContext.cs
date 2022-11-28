@@ -5,6 +5,7 @@ namespace VetManager.Models;
 public class VetManagerContext : DbContext
 {
     public DbSet<Address> Addresses { get; set; }
+    public DbSet<Hospital> Hospitals { get; set; }
 
     public VetManagerContext(DbContextOptions<VetManagerContext> options) : base(options) { }
 }
