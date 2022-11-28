@@ -79,4 +79,22 @@ public class AddressController : Controller
         TempData["MessageSuccess"] = $"Endereço com ID {id} atualizado com sucesso.";
         return RedirectToAction("Index");
     }
+
+    public IActionResult Delete(int id)
+    {
+        Address address = _context.Addresses.Find(id);
+
+        if(address != null)
+        {
+            _context.Addresses.Remove(address);
+            _context.SaveChanges();
+
+            TempData["MessageSuccess"] = $"Endereço com ID {id} removido com sucesso.";
+            return RedirectToAction("Index");
+        }
+
+
+        TempData["MessageError"] = $"Endereço com ID {id} não existe.";
+        return RedirectToAction("Index");
+    }
 }
