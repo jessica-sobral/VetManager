@@ -1,0 +1,42 @@
+@model VetManager.Models.Address
+
+@{
+    ViewData["Title"] = $"Atualizar endereço {@Model.Id}";
+}
+
+<h1 class="mb-3">@ViewData["Title"]</h1>
+<p class="mb-4">Utilize o formulário abaixo para atualizar o endereço @Model.Id.</p>
+
+<form action="/Address/Save" method="post" class="row g-3">
+    <div class="col-md-2">
+        <label for="id" class="form-label">ID</label>
+        <input type="text" class="form-control" name="id" id="id" value="@Model.Id" readonly>
+    </div>
+    <div class="col-md-3">
+        <label for="zipCode" class="form-label">CEP</label>
+        <input type="text" class="form-control" name="zipCode" id="zipCode" value="@Model.ZipCode" required>
+    </div>
+    <div class="col-md-5">
+        <label for="street" class="form-label">Rua</label>
+        <input type="text" class="form-control" name="street" id="street" value="@Model.Street" required>
+    </div>
+    <div class="col-md-2">
+        <label for="number" class="form-label">Número</label>
+        <input type="text" class="form-control" name="number" id="number" value="@Model.Number" required>
+    </div>
+    <div class="col-md-4">
+        <label for="district" class="form-label">Bairro</label>
+        <input type="text" class="form-control" name="district" id="district" value="@Model.District" required>
+    </div>
+    <div class="col-md-4">
+        <label for="city" class="form-label">Cidade</label>
+        <input type="text" class="form-control" name="city" id="city" value="@Model.City" required>
+    </div>
+    <div class="col-md-4">
+        <label for="state" class="form-label">Estado</label>
+        <input type="text" class="form-control" name="state" id="state" value="@Model.State" required>
+    </div>
+    <div class="col-12 mt-4">
+        <button type="submit" class="btn btn-outline-dark">Salvar</button>
+    </div>
+</form>

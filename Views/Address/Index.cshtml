@@ -28,7 +28,6 @@ else
                 <th scope="col">Estado</th>
                 <th scope="col"></th>
                 <th scope="col"></th>
-                <th scope="col"></th>
             </tr>
         </thead>
         <tbody class="table-group-divider">
@@ -42,8 +41,11 @@ else
                     <td>@address.District</td>
                     <td>@address.City</td>
                     <td>@address.State</td>
-                    <td></td>
-                    <td></td>
+                    <td>
+                        <a href="/Address/Update/@address.Id" class="btn btn-outline-dark">
+                            Atualizar
+                        </a>
+                    </td>
                     <td></td>
                 </tr>
             }
@@ -55,5 +57,11 @@ else
 {
     <div class="alert alert-success alert-dismissible fade show mt-4" role="alert">
         @TempData["MessageSuccess"]<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+@if(TempData["MessageError"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show mt-4" role="alert">
+        @TempData["MessageError"]<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 }
