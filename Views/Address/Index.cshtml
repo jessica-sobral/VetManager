@@ -57,15 +57,17 @@ else
     </table>
 }
 
-@if(TempData["MessageSuccess"] != null)
+@if (TempData["MessageSuccess"] != null)
 {
     <div class="alert alert-success alert-dismissible fade show mt-4" role="alert">
-        @TempData["MessageSuccess"]<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        @TempData["MessageSuccess"]<button type="button" class="btn-close" data-bs-dismiss="alert"
+        aria-label="Close"></button>
     </div>
 }
-@if(TempData["MessageError"] != null)
+@if (TempData["MessageError"] != null)
 {
     <div class="alert alert-danger alert-dismissible fade show mt-4" role="alert">
-        @TempData["MessageError"]<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        @TempData["MessageError"]<button type="button" class="btn-close" data-bs-dismiss="alert"
+        aria-label="Close"></button>
     </div>
 }
