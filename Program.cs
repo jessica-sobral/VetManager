@@ -1,7 +1,14 @@
+using Microsoft.EntityFrameworkCore;
+using VetManager.Models;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddDbContext<VetManagerContext>(options => 
+    options.UseMySQL("server=localhost;database=vetmanager;user=root;password=123456")
+);
 
 var app = builder.Build();
 
