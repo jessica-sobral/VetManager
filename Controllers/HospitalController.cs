@@ -42,4 +42,33 @@ public class HospitalController : Controller
 
         return View(hospital);
     }
+
+    public IActionResult Create()
+    {
+        return View();
+    }
+
+    [HttpPost]
+    public IActionResult Add([FromForm] int id, [FromForm] string name, [FromForm] string telephone1, [FromForm] string telephone2, [FromForm] int addressId)
+    {
+        Hospital hospital = new Hospital(id, name, telephone1, telephone2, addressId);
+
+        if(_context.Addresses.Find(hospital.AddressId) == null)
+        {
+            TempData["MessageError"] = $"Endereço com ID {hospital.Id} não existe.";
+            return RedirectToAction("Create");
+        }
+
+        if(_context.Hospitals.Find(hospital.Id) != null)
+        {
+            TempData["MessageError"] = $"Hospital com ID {hospital.Id} já existe.";
+            return RedirectToAction("Create");
+        }
+        
+        _context.Hospitals.Add(hospital);
+        _context.SaveChanges();
+
+        TempData["MessageSuccess"] = $"Hospital com ID {hospital.Id} cadastrado com sucesso.";
+        return RedirectToAction("Index");
+    }
 }

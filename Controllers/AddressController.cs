@@ -27,16 +27,14 @@ public class AddressController : Controller
     {
         Address address = new Address(id, zipCode, street, number, district, city, state);
 
-        if(_context.Addresses.Find(address.Id) == null)
-        {
-            _context.Addresses.Add(address);
-            _context.SaveChanges();
-        }
-        else
+        if(_context.Addresses.Find(address.Id) != null)
         {
             TempData["MessageError"] = $"Endereço com ID {address.Id} já existe.";
             return RedirectToAction("Create");
         }
+        
+        _context.Addresses.Add(address);
+        _context.SaveChanges();
 
         TempData["MessageSuccess"] = $"Endereço com ID {address.Id} cadastrado com sucesso.";
         return RedirectToAction("Index");

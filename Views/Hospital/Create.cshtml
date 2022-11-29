@@ -1,0 +1,39 @@
+@{
+    ViewData["Title"] = "Cadastrar hospital";
+}
+
+<h1 class="mb-3">@ViewData["Title"]</h1>
+<p class="mb-4">Utilize o formulário abaixo para cadastrar uma nova unidade.</p>
+
+<form action="/Hospital/Add" method="post" class="row g-3">
+    <div class="col-md-2">
+        <label for="id" class="form-label">ID</label>
+        <input type="text" class="form-control" name="id" id="id" required>
+    </div>
+    <div class="col-md-10">
+        <label for="name" class="form-label">Nome da unidade</label>
+        <input type="text" class="form-control" name="name" id="name" required>
+    </div>
+    <div class="col-md-5">
+        <label for="telephone1" class="form-label">Telefone 1</label>
+        <input type="text" class="form-control" name="telephone1" id="telephone1" required>
+    </div>
+    <div class="col-md-5">
+        <label for="telephone2" class="form-label">Telefone 2</label>
+        <input type="text" class="form-control" name="telephone2" id="telephone2" required>
+    </div>
+    <div class="col-md-2">
+        <label for="addressId" class="form-label">ID do endereço</label>
+        <input type="text" class="form-control" name="addressId" id="addressId" required>
+    </div>
+    <div class="col-12 mt-4">
+        <button type="submit" class="btn btn-outline-dark">Salvar</button>
+    </div>
+</form>
+
+@if(TempData["MessageError"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show mt-4" role="alert">
+        @TempData["MessageError"]<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
