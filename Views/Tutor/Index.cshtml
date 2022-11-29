@@ -1,0 +1,74 @@
+@model IEnumerable<VetManager.Models.Tutor>
+
+@{
+    ViewData["Title"] = "Tutores";
+}
+
+<h1 class="mb-4">@ViewData["Title"]</h1>
+
+<a href="/Tutor/Create" class="btn btn-outline-dark mb-3">
+    Cadastrar tutor
+</a>
+
+@if (Model.Count() == 0)
+{
+    <p>Nenhum tutor cadastrado.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Nome</th>
+                <th scope="col">CPF</th>
+                <th scope="col">EndereçoId</th>
+                <th scope="col">Telefone</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody class="table-group-divider">
+            @foreach (var tutor in Model)
+            {
+                <tr>
+                    <th scope="row">@tutor.Id</th>
+                    <td>@tutor.Name</td>
+                    <td>@tutor.Cpf</td>
+                    <td>@tutor.AddressId</td>
+                    <td>@tutor.Telephone</td>
+                    <td>
+                        <a href="/Tutor/Show/@tutor.Id" class="btn btn-outline-dark">
+                            Detalhes
+                        </a>
+                    </td>
+                    <td>
+                        <a href="/Tutor/Update/@tutor.Id" class="btn btn-outline-dark">
+                            Atualizar
+                        </a>
+                    </td>
+                    <td>
+                        <a href="/Tutor/Delete/@tutor.Id" class="btn btn-outline-dark">
+                            Remover
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@if (TempData["MessageSuccess"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show mt-4" role="alert">
+        @TempData["MessageSuccess"]<button type="button" class="btn-close" data-bs-dismiss="alert"
+        aria-label="Close"></button>
+    </div>
+}
+@if (TempData["MessageError"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show mt-4" role="alert">
+        @TempData["MessageError"]<button type="button" class="btn-close" data-bs-dismiss="alert"
+        aria-label="Close"></button>
+    </div>
+}

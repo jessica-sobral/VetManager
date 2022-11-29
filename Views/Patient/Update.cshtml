@@ -1,0 +1,38 @@
+@model VetManager.Models.Patient
+
+@{
+    ViewData["Title"] = $"Atualizar paciente {@Model.Id}";
+}
+
+<h1 class="mb-3">@ViewData["Title"]</h1>
+<p class="mb-4">Utilize o formulário abaixo para atualizar o paciente @Model.Id.</p>
+
+<form action="/Patient/Save" method="post" class="row g-3">
+    <div class="col-md-2">
+        <label for="id" class="form-label">ID</label>
+        <input type="text" class="form-control" name="id" id="id" value="@Model.Id" readonly>
+    </div>
+    <div class="col-md-3">
+        <label for="name" class="form-label">Nome</label>
+        <input type="text" class="form-control" name="name" id="name" value="@Model.Name" required>
+    </div>
+    <div class="col-md-5">
+        <label for="age" class="form-label">Idade</label>
+        <input type="text" class="form-control" name="age" id="age" value="@Model.Age" required>
+    </div>
+    <div class="col-md-2">
+        <label for="species" class="form-label">Especie</label>
+        <input type="text" class="form-control" name="species" id="species" value="@Model.Species" required>
+    </div>
+    <div class="col-md-4">
+        <label for="bloodType" class="form-label">Tipo sanguíneo</label>
+        <input type="text" class="form-control" name="bloodType" id="bloodType" value="@Model.BloodType" required>
+    </div>
+    <div class="col-md-4">
+        <label for="tutorId" class="form-label">Tutor Id</label>
+        <input type="text" class="form-control" name="tutorId" id="tutorId" value="@Model.TutorId" required>
+    </div>
+    <div class="col-12 mt-4">
+        <button type="submit" class="btn btn-outline-dark">Salvar</button>
+    </div>
+</form>
