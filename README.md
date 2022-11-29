@@ -1,0 +1,2 @@
+# Vet Manager
+Repositório dedicado ao projeto final de Linguagem de Programação 3, por Jéssica Sobral, Maria Eduarda Lúcio, Matheus Portes e Werônica Alves. O projeto consiste num sistemz que organiza as fichas médicas dos pacientes de uma clinica veterinária, contendo informações sobre as unidades veterinárias, os pacientes, tutores dos pacientes, médicos responsáveis etc.
