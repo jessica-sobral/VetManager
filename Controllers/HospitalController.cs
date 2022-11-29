@@ -17,4 +17,29 @@ public class HospitalController : Controller
     {
         return View(_context.Hospitals);
     }
+
+    public IActionResult Show(int id)
+    {
+        Hospital hospital = _context.Hospitals.Find(id);
+
+        if(hospital == null)
+        {
+            TempData["MessageError"] = $"Hospital com ID {id} não existe.";
+            return RedirectToAction("Index");
+        }
+
+        Address address = _context.Addresses.Find(hospital.AddressId);
+
+        ViewData["Address"] = new Address(
+            address.Id,
+            address.ZipCode,
+            address.Street,
+            address.Number,
+            address.District,
+            address.City,
+            address.State
+        );
+
+        return View(hospital);
+    }
 }

@@ -6,28 +6,56 @@
 
 <h1 class="mb-4">@ViewData["Title"]</h1>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Nome da unidade</th>
-            <th scope="col">Telefone 1</th>
-            <th scope="col">Telefone 2</th>
-            <th scope="col"></th>
-            <th scope="col"></th>
-        </tr>
-    </thead>
-    <tbody class="table-group-divider">
-        @foreach (var hospital in Model)
-        {
+@if (Model.Count() == 0)
+{
+    <p>Nenhum hospital cadastrado.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
             <tr>
-                <th scope="row">@hospital.Id</th>
-                <td>@hospital.Name</td>
-                <td>@hospital.Telephone1</td>
-                <td>@hospital.Telephone2</td>
-                <td></td>
-                <td></td>
+                <th scope="col">ID</th>
+                <th scope="col">Nome da unidade</th>
+                <th scope="col">Telefone 1</th>
+                <th scope="col">Telefone 2</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+                <th scope="col"></th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody class="table-group-divider">
+            @foreach (var hospital in Model)
+            {
+                <tr>
+                    <th scope="row">@hospital.Id</th>
+                    <td>@hospital.Name</td>
+                    <td>@hospital.Telephone1</td>
+                    <td>@hospital.Telephone2</td>
+                    <td>
+                        <a href="/Hospital/Show/@hospital.Id" class="btn btn-outline-dark">
+                            Detalhes
+                        </a>
+                    </td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@if (TempData["MessageSuccess"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show mt-4" role="alert">
+        @TempData["MessageSuccess"]<button type="button" class="btn-close" data-bs-dismiss="alert"
+        aria-label="Close"></button>
+    </div>
+}
+@if (TempData["MessageError"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show mt-4" role="alert">
+        @TempData["MessageError"]<button type="button" class="btn-close" data-bs-dismiss="alert"
+        aria-label="Close"></button>
+    </div>
+}

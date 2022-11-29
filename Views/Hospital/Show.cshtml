@@ -1,0 +1,21 @@
+@model VetManager.Models.Hospital
+
+@{
+    ViewData["Title"] = $"Hospital {Model.Name}";
+   var address = ViewData["Address"] as Address;
+}
+
+<h1 class="mb-4">@ViewData["Title"]</h1>
+
+<p><strong>ID:</strong> @Model.Id</p>
+<p><strong>Nome da unidade:</strong> @Model.Name</p>
+<p><strong>Telefones:</strong> @Model.Telephone1, @Model.Telephone2</p>
+<p><strong>Endereço:</strong> @address.Street, @address.Number - @address.District, @address.City - @address.ZipCode.</p>
+
+@if (TempData["MessageSuccess"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show mt-4" role="alert">
+        @TempData["MessageSuccess"]<button type="button" class="btn-close" data-bs-dismiss="alert"
+        aria-label="Close"></button>
+    </div>
+}
