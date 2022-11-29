@@ -88,6 +88,15 @@ public class AddressController : Controller
             return RedirectToAction("Index");
         }
 
+        foreach(var hospital in _context.Hospitals)
+        {
+            if(hospital.AddressId == address.Id)
+            {
+                TempData["MessageError"] = $"Endereço com ID {id} pertence a algum hospital.";
+                return RedirectToAction("Index");
+            }
+        }
+
         _context.Addresses.Remove(address);
         _context.SaveChanges();
 
