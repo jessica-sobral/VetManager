@@ -82,17 +82,16 @@ public class AddressController : Controller
     {
         Address address = _context.Addresses.Find(id);
 
-        if(address != null)
+        if(address == null)
         {
-            _context.Addresses.Remove(address);
-            _context.SaveChanges();
-
-            TempData["MessageSuccess"] = $"Endereço com ID {id} removido com sucesso.";
+            TempData["MessageError"] = $"Endereço com ID {id} não existe.";
             return RedirectToAction("Index");
         }
 
+        _context.Addresses.Remove(address);
+        _context.SaveChanges();
 
-        TempData["MessageError"] = $"Endereço com ID {id} não existe.";
+        TempData["MessageSuccess"] = $"Endereço com ID {id} removido com sucesso.";
         return RedirectToAction("Index");
     }
 }
