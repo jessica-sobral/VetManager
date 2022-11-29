@@ -12,6 +12,10 @@
 <p><strong>Telefones:</strong> @Model.Telephone1, @Model.Telephone2</p>
 <p><strong>Endereço:</strong> @address.Street, @address.Number - @address.District, @address.City - @address.ZipCode.</p>
 
+<a href="/Hospital/Update/@Model.Id" class="btn btn-outline-dark mt-2">
+    Atualizar
+</a>
+
 @if (TempData["MessageSuccess"] != null)
 {
     <div class="alert alert-success alert-dismissible fade show mt-4" role="alert">
