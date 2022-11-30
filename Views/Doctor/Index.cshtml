@@ -1,18 +1,18 @@
 @model IEnumerable<VetManager.Models.Doctor>
 
 @{
-    ViewData["Title"] = "Doutores";
+    ViewData["Title"] = "Médicos";
 }
 
 <h1 class="mb-4">@ViewData["Title"]</h1>
 
-<a href="/Doctor/Create" class="btn btn-outline-dark mb-3">
-    Cadastrar doutor
+<a href="/Doctor/Create" class="btn btn-success mb-3">
+    Cadastrar médico
 </a>
 
 @if (Model.Count() == 0)
 {
-    <p>Nenhum doutor cadastrado.</p>
+    <p>Nenhum médico cadastrado.</p>
 }
 else
 {
@@ -21,10 +21,10 @@ else
             <tr>
                 <th scope="col">ID</th>
                 <th scope="col">Nome</th>
-                <th scope="col">ESpecialidade</th>
+                <th scope="col">Especialidade</th>
                 <th scope="col">CPF</th>
-                <th scope="col">EndereçoId</th>
                 <th scope="col">Telefone</th>
+                <th scope="col"></th>
                 <th scope="col"></th>
                 <th scope="col"></th>
             </tr>
@@ -37,7 +37,6 @@ else
                     <td>@doctor.Name</td>
                     <td>@doctor.Speciality</td>
                     <td>@doctor.Cpf</td>
-                    <td>@doctor.AddressId</td>
                     <td>@doctor.Telephone</td>
                     <td>
                         <a href="/Doctor/Show/@doctor.Id" class="btn btn-outline-dark">
@@ -45,12 +44,12 @@ else
                         </a>
                     </td>
                     <td>
-                        <a href="/Doctor/Update/@doctor.Id" class="btn btn-outline-dark">
+                        <a href="/Doctor/Update/@doctor.Id" class="btn btn-outline-primary">
                             Atualizar
                         </a>
                     </td>
                     <td>
-                        <a href="/Doctor/Delete/@doctor.Id" class="btn btn-outline-dark">
+                        <a href="/Doctor/Delete/@doctor.Id" class="btn btn-danger">
                             Remover
                         </a>
                     </td>

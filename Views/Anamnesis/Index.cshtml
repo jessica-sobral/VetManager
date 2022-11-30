@@ -6,13 +6,13 @@
 
 <h1 class="mb-4">@ViewData["Title"]</h1>
 
-<a href="/Anamnesis/Create" class="btn btn-outline-dark mb-3">
-    Cadastrar Anamnese
+<a href="/Anamnesis/Create" class="btn btn-success mb-3">
+    Cadastrar anamnese
 </a>
 
 @if (Model.Count() == 0)
 {
-    <p>Nenhuma Anamnese cadastrada.</p>
+    <p>Nenhuma anamnese cadastrada.</p>
 }
 else
 {
@@ -20,10 +20,11 @@ else
         <thead>
             <tr>
                 <th scope="col">ID</th>
-                <th scope="col">PacienteId</th>
+                <th scope="col">ID do paciente</th>
                 <th scope="col">Sintomas</th>
                 <th scope="col">Diagnóstico</th>
                 <th scope="col">Observations</th>
+                <th scope="col"></th>
                 <th scope="col"></th>
                 <th scope="col"></th>
             </tr>
@@ -43,12 +44,12 @@ else
                         </a>
                     </td>
                     <td>
-                        <a href="/Anamnesis/Update/@anamnesis.Id" class="btn btn-outline-dark">
+                        <a href="/Anamnesis/Update/@anamnesis.Id" class="btn btn-outline-primary">
                             Atualizar
                         </a>
                     </td>
                     <td>
-                        <a href="/Anamnesis/Delete/@anamnesis.Id" class="btn btn-outline-dark">
+                        <a href="/Anamnesis/Delete/@anamnesis.Id" class="btn btn-danger">
                             Remover
                         </a>
                     </td>

@@ -32,7 +32,7 @@ public class AnamnesisController : Controller
         ViewData["Patient"] = new Patient(
             patient.Id,
             patient.Name,
-            patient.Age,
+            patient.BirthDate,
             patient.Species,
             patient.BloodType,
             patient.TutorId

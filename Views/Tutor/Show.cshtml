@@ -5,19 +5,22 @@
    var address = ViewData["Address"] as Address;
 }
 
+<a href="/Tutor/Index" class="btn btn-light">< Voltar</a>
+
 <h1 class="mb-4">@ViewData["Title"]</h1>
 
 <p><strong>ID:</strong> @Model.Id</p>
 <p><strong>Nome do tutor:</strong> @Model.Name</p>
 <p><strong>CPF:</strong> @Model.Cpf</p>
-<p><strong>Endereço:</strong> @address.Street, @address.Number - @address.District, @address.City - @address.ZipCode.</p>
 <p><strong>Telefone:</strong> @Model.Telephone</p>
+<p><strong>Endereço:</strong> @address.Street, @address.Number - @address.District, @address.City - @address.ZipCode.</p>
+<p><strong>ID do endereço:</strong> @Model.AddressId</p>
 
-<a href="/Tutor/Update/@Model.Id" class="btn btn-outline-dark mt-2">
+<a href="/Tutor/Update/@Model.Id" class="btn btn-outline-primary mt-2">
     Atualizar
 </a>
 
-<a href="/Tutor/Delete/@Model.Id" class="btn btn-outline-dark ms-3 mt-2">
+<a href="/Tutor/Delete/@Model.Id" class="btn btn-danger ms-3 mt-2">
     Remover
 </a>
 

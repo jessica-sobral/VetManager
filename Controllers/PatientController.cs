@@ -46,9 +46,13 @@ public class PatientController : Controller
     }
 
     [HttpPost]
-    public IActionResult Add([FromForm] int id, [FromForm] string name, [FromForm] int age, [FromForm] string species, [FromForm] string bloodType, [FromForm] int tutorId)
+    public IActionResult Add([FromForm] int id, [FromForm] string name, [FromForm] string birthDate, [FromForm] string species, [FromForm] string bloodType, [FromForm] int tutorId)
     {
-        Patient patient = new Patient(id, name, age, species, bloodType, tutorId);
+        var day = Int32.Parse(birthDate.Substring(8, 2));
+        var month = Int32.Parse(birthDate.Substring(5, 2));
+        var year = Int32.Parse(birthDate.Substring(0, 4));
+
+        Patient patient = new Patient(id, name, new DateTime(year, month, day), species, bloodType, tutorId);
 
         if(_context.Tutors.Find(patient.TutorId) == null)
         {
@@ -83,7 +87,7 @@ public class PatientController : Controller
     }
 
     [HttpPost]
-    public IActionResult Save([FromForm] int id, [FromForm] string name, [FromForm] int age, [FromForm] string species, [FromForm] string bloodType, [FromForm] int tutorId)
+    public IActionResult Save([FromForm] int id, [FromForm] string name, [FromForm] string birthDate, [FromForm] string species, [FromForm] string bloodType, [FromForm] int tutorId)
     {
         Patient patient = _context.Patients.Find(id);
 
@@ -105,8 +109,12 @@ public class PatientController : Controller
             return RedirectToAction("Update");
         }
 
+        var day = Int32.Parse(birthDate.Substring(8, 2));
+        var month = Int32.Parse(birthDate.Substring(5, 2));
+        var year = Int32.Parse(birthDate.Substring(0, 4));
+
         patient.Name = name;
-        patient.Age = age;
+        patient.BirthDate = new DateTime(year, month, day);
         patient.Species = species;
         patient.BloodType = bloodType;
         patient.TutorId = tutorId;
