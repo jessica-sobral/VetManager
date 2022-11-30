@@ -1,0 +1,32 @@
+@model VetManager.Models.Patient
+
+@{
+    ViewData["Title"] = $"Patient {Model.Name}";
+   var tutor = ViewData["Tutor"] as Tutor;
+}
+
+<h1 class="mb-4">@ViewData["Title"]</h1>
+
+<p><strong>ID:</strong> @Model.Id</p>
+<p><strong>Nome do paciente:</strong> @Model.Name</p>
+<p><strong>Idade:</strong> @Model.Age</p>
+<p><strong>Espécie:</strong> @Model.Species</p>
+<p><strong>Tipo sanguíneo:</strong> @Model.BloodType</p>
+<p><strong>Tutor:</strong> @tutor.Name, @tutor.Cpf - @tutor.AddressId, @tutor.Telephone</p>
+
+
+<a href="/Patient/Update/@Model.Id" class="btn btn-outline-dark mt-2">
+    Atualizar
+</a>
+
+<a href="/Patient/Delete/@Model.Id" class="btn btn-outline-dark ms-3 mt-2">
+    Remover
+</a>
+
+@if (TempData["MessageSuccess"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show mt-4" role="alert">
+        @TempData["MessageSuccess"]<button type="button" class="btn-close" data-bs-dismiss="alert"
+        aria-label="Close"></button>
+    </div>
+}

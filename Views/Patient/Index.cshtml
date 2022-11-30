@@ -1,18 +1,18 @@
-@model IEnumerable<VetManager.Models.Hospital>
+@model IEnumerable<VetManager.Models.Patient>
 
 @{
-    ViewData["Title"] = "Hospitais";
+    ViewData["Title"] = "Pacientes";
 }
 
 <h1 class="mb-4">@ViewData["Title"]</h1>
 
-<a href="/Hospital/Create" class="btn btn-outline-dark mb-3">
-    Cadastrar unidade
+<a href="/Patient/Create" class="btn btn-outline-dark mb-3">
+    Cadastrar paciente
 </a>
 
 @if (Model.Count() == 0)
 {
-    <p>Nenhum hospital cadastrado.</p>
+    <p>Nenhum paciente cadastrado.</p>
 }
 else
 {
@@ -20,34 +20,37 @@ else
         <thead>
             <tr>
                 <th scope="col">ID</th>
-                <th scope="col">Nome da unidade</th>
-                <th scope="col">Telefone 1</th>
-                <th scope="col">Telefone 2</th>
-                <th scope="col"></th>
+                <th scope="col">Nome</th>
+                <th scope="col">Idade</th>
+                <th scope="col">Espécie</th>
+                <th scope="col">TipoSanguineo</th>
+                <th scope="col">TutorId</th>
                 <th scope="col"></th>
                 <th scope="col"></th>
             </tr>
         </thead>
         <tbody class="table-group-divider">
-            @foreach (var hospital in Model)
+            @foreach (var patient in Model)
             {
                 <tr>
-                    <th scope="row">@hospital.Id</th>
-                    <td>@hospital.Name</td>
-                    <td>@hospital.Telephone1</td>
-                    <td>@hospital.Telephone2</td>
+                    <th scope="row">@patient.Id</th>
+                    <td>@patient.Name</td>
+                    <td>@patient.Age</td>
+                    <td>@patient.Species</td>
+                    <td>@patient.BloodType</td>
+                    <td>@patient.TutorId</td>
                     <td>
-                        <a href="/Hospital/Show/@hospital.Id" class="btn btn-outline-dark">
+                        <a href="/Patient/Show/@patient.Id" class="btn btn-outline-dark">
                             Detalhes
                         </a>
                     </td>
                     <td>
-                        <a href="/Hospital/Update/@hospital.Id" class="btn btn-outline-dark">
+                        <a href="/Patient/Update/@patient.Id" class="btn btn-outline-dark">
                             Atualizar
                         </a>
                     </td>
                     <td>
-                        <a href="/Hospital/Delete/@hospital.Id" class="btn btn-outline-dark">
+                        <a href="/Patient/Delete/@patient.Id" class="btn btn-outline-dark">
                             Remover
                         </a>
                     </td>

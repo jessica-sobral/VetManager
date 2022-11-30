@@ -1,22 +1,23 @@
-@model VetManager.Models.Hospital
+@model VetManager.Models.Tutor
 
 @{
-    ViewData["Title"] = $"Hospital {Model.Name}";
+    ViewData["Title"] = $"Tutor {Model.Name}";
    var address = ViewData["Address"] as Address;
 }
 
 <h1 class="mb-4">@ViewData["Title"]</h1>
 
 <p><strong>ID:</strong> @Model.Id</p>
-<p><strong>Nome da unidade:</strong> @Model.Name</p>
-<p><strong>Telefones:</strong> @Model.Telephone1, @Model.Telephone2</p>
+<p><strong>Nome do tutor:</strong> @Model.Name</p>
+<p><strong>CPF:</strong> @Model.Cpf</p>
 <p><strong>Endereço:</strong> @address.Street, @address.Number - @address.District, @address.City - @address.ZipCode.</p>
+<p><strong>Telefone:</strong> @Model.Telephone</p>
 
-<a href="/Hospital/Update/@Model.Id" class="btn btn-outline-dark mt-2">
+<a href="/Tutor/Update/@Model.Id" class="btn btn-outline-dark mt-2">
     Atualizar
 </a>
 
-<a href="/Hospital/Delete/@Model.Id" class="btn btn-outline-dark ms-3 mt-2">
+<a href="/Tutor/Delete/@Model.Id" class="btn btn-outline-dark ms-3 mt-2">
     Remover
 </a>
 

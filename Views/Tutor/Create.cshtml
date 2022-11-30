@@ -1,30 +1,30 @@
 @{
-    ViewData["Title"] = "Cadastrar hospital";
+    ViewData["Title"] = "Cadastrar tutor";
 }
 
 <h1 class="mb-3">@ViewData["Title"]</h1>
-<p class="mb-4">Utilize o formulário abaixo para cadastrar uma nova unidade.</p>
+<p class="mb-4">Utilize o formulário abaixo para cadastrar o tutor de um paciente.</p>
 
-<form action="/Hospital/Add" method="post" class="row g-3">
+<form action="/Tutor/Add" method="post" class="row g-3">
     <div class="col-md-2">
         <label for="id" class="form-label">ID</label>
         <input type="text" class="form-control" name="id" id="id" required>
     </div>
     <div class="col-md-10">
-        <label for="name" class="form-label">Nome da unidade</label>
+        <label for="name" class="form-label">Nome do tutor</label>
         <input type="text" class="form-control" name="name" id="name" required>
     </div>
     <div class="col-md-5">
-        <label for="telephone1" class="form-label">Telefone 1</label>
-        <input type="text" class="form-control" name="telephone1" id="telephone1" required>
+        <label for="cpf" class="form-label">CPF</label>
+        <input type="text" class="form-control" name="cpf" id="cpf" required>
     </div>
     <div class="col-md-5">
-        <label for="telephone2" class="form-label">Telefone 2</label>
-        <input type="text" class="form-control" name="telephone2" id="telephone2" required>
+        <label for="addressId" class="form-label">Endereço Id</label>
+        <input type="text" class="form-control" name="addressId" id="addressId" required>
     </div>
     <div class="col-md-2">
-        <label for="addressId" class="form-label">ID do endereço</label>
-        <input type="text" class="form-control" name="addressId" id="addressId" required>
+        <label for="telephone" class="form-label">Telefone</label>
+        <input type="text" class="form-control" name="telephone" id="telephone" required>
     </div>
     <div class="col-12 mt-4">
         <button type="submit" class="btn btn-outline-dark">Salvar</button>
