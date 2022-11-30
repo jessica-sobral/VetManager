@@ -92,19 +92,13 @@ public class TutorController : Controller
         if(_context.Addresses.Find(tutor.AddressId) == null)
         {
             TempData["MessageError"] = $"Endereço com ID {tutor.Id} não existe.";
-            return RedirectToAction("Create");
+            return RedirectToAction("Update", new{ id = id });
         }
 
         if(tutor == null)
         {
             TempData["MessageError"] = $"Tutor com ID {id} não existe.";
-            return RedirectToAction("Update");
-        }
-
-        if(_context.Addresses.Find(tutor.AddressId) == null)
-        {
-            TempData["MessageError"] = $"Endereço com ID {id} não existe.";
-            return RedirectToAction("Update");
+            return RedirectToAction("Update", new{ id = id });
         }
 
         tutor.Name = name;
