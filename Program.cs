@@ -7,7 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<VetManagerContext>(options => 
-    options.UseMySQL("server=localhost;database=estudante;user=estudante;password=estudante")
+    options.UseMySQL("server=localhost;database=vetmanager;user=root;password=123456")
 );
 
 var app = builder.Build();

@@ -1,8 +1,8 @@
 @model VetManager.Models.Patient
 
 @{
-    ViewData["Title"] = $"Patient {Model.Name}";
-   var tutor = ViewData["Tutor"] as Tutor;
+    ViewData["Title"] = $"Paciente {Model.Name}";
+    var tutor = ViewData["Tutor"] as Tutor;
 }
 
 <h1 class="mb-4">@ViewData["Title"]</h1>
@@ -11,9 +11,11 @@
 <p><strong>Nome do paciente:</strong> @Model.Name</p>
 <p><strong>Idade:</strong> @Model.Age</p>
 <p><strong>Espécie:</strong> @Model.Species</p>
-<p><strong>Tipo sanguíneo:</strong> @Model.BloodType</p>
-<p><strong>Tutor:</strong> @tutor.Name, @tutor.Cpf - @tutor.AddressId, @tutor.Telephone</p>
+<p class="mb-4"><strong>Tipo sanguíneo:</strong> @Model.BloodType</p>
 
+<h3>Tutor</h3>
+<p><strong>Nome:</strong> @tutor.Name</p>
+<p><strong>Telefone:</strong> @tutor.Telephone</p>
 
 <a href="/Patient/Update/@Model.Id" class="btn btn-outline-dark mt-2">
     Atualizar
