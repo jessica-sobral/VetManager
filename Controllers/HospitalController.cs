@@ -55,7 +55,7 @@ public class HospitalController : Controller
 
         if(_context.Addresses.Find(hospital.AddressId) == null)
         {
-            TempData["MessageError"] = $"Endereço com ID {hospital.Id} não existe.";
+            TempData["MessageError"] = $"Endereço com ID {hospital.AddressId} não existe.";
             return RedirectToAction("Create");
         }
 
