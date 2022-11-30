@@ -36,3 +36,10 @@
         <button type="submit" class="btn btn-outline-dark">Salvar</button>
     </div>
 </form>
+
+@if(TempData["MessageError"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show mt-4" role="alert">
+        @TempData["MessageError"]<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
