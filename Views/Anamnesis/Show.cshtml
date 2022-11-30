@@ -1,0 +1,30 @@
+@model VetManager.Models.Anamnesis
+
+@{
+    ViewData["Title"] = $"Anamnesis {Model.Id}";
+   var patient = ViewData["Patient"] as Patient;
+}
+
+<h1 class="mb-4">@ViewData["Title"]</h1>
+
+<p><strong>ID:</strong> @Model.Id</p>
+<p><strong>Paciente:</strong> @patient.Name, idade: @patient.Age - @patient.Species, tipo sanguínio @patient.BloodType - ID do tutor: @patient.TutorId.</p>
+<p><strong>Sintomas:</strong> @Model.Symptoms</p>
+<p><strong>Diagnóstico:</strong> @Model.Diagnosis</p>
+<p><strong>Observações:</strong> @Model.Observations</p>
+
+<a href="/Anamnesis/Update/@Model.Id" class="btn btn-outline-dark mt-2">
+    Atualizar
+</a>
+
+<a href="/Anamnesis/Delete/@Model.Id" class="btn btn-outline-dark ms-3 mt-2">
+    Remover
+</a>
+
+@if (TempData["MessageSuccess"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show mt-4" role="alert">
+        @TempData["MessageSuccess"]<button type="button" class="btn-close" data-bs-dismiss="alert"
+        aria-label="Close"></button>
+    </div>
+}

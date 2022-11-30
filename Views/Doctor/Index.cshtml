@@ -1,18 +1,18 @@
-@model IEnumerable<VetManager.Models.Tutor>
+@model IEnumerable<VetManager.Models.Doctor>
 
 @{
-    ViewData["Title"] = "Tutores";
+    ViewData["Title"] = "Doutores";
 }
 
 <h1 class="mb-4">@ViewData["Title"]</h1>
 
-<a href="/Tutor/Create" class="btn btn-outline-dark mb-3">
-    Cadastrar tutor
+<a href="/Doctor/Create" class="btn btn-outline-dark mb-3">
+    Cadastrar doutor
 </a>
 
 @if (Model.Count() == 0)
 {
-    <p>Nenhum tutor cadastrado.</p>
+    <p>Nenhum doutor cadastrado.</p>
 }
 else
 {
@@ -21,6 +21,7 @@ else
             <tr>
                 <th scope="col">ID</th>
                 <th scope="col">Nome</th>
+                <th scope="col">ESpecialidade</th>
                 <th scope="col">CPF</th>
                 <th scope="col">EndereçoId</th>
                 <th scope="col">Telefone</th>
@@ -29,26 +30,27 @@ else
             </tr>
         </thead>
         <tbody class="table-group-divider">
-            @foreach (var tutor in Model)
+            @foreach (var doctor in Model)
             {
                 <tr>
-                    <th scope="row">@tutor.Id</th>
-                    <td>@tutor.Name</td>
-                    <td>@tutor.Cpf</td>
-                    <td>@tutor.AddressId</td>
-                    <td>@tutor.Telephone</td>
+                    <th scope="row">@doctor.Id</th>
+                    <td>@doctor.Name</td>
+                    <td>@doctor.Speciality</td>
+                    <td>@doctor.Cpf</td>
+                    <td>@doctor.AddressId</td>
+                    <td>@doctor.Telephone</td>
                     <td>
-                        <a href="/Tutor/Show/@tutor.Id" class="btn btn-outline-dark">
+                        <a href="/Doctor/Show/@doctor.Id" class="btn btn-outline-dark">
                             Detalhes
                         </a>
                     </td>
                     <td>
-                        <a href="/Tutor/Update/@tutor.Id" class="btn btn-outline-dark">
+                        <a href="/Doctor/Update/@doctor.Id" class="btn btn-outline-dark">
                             Atualizar
                         </a>
                     </td>
                     <td>
-                        <a href="/Tutor/Delete/@tutor.Id" class="btn btn-outline-dark">
+                        <a href="/Doctor/Delete/@doctor.Id" class="btn btn-outline-dark">
                             Remover
                         </a>
                     </td>

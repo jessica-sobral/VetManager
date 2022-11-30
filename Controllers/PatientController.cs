@@ -90,13 +90,19 @@ public class PatientController : Controller
         if(_context.Tutors.Find(patient.TutorId) == null)
         {
             TempData["MessageError"] = $"Tutor com ID {patient.TutorId} não existe.";
-            return RedirectToAction("Update", new{ id = id });
+            return RedirectToAction("Create");
         }
 
         if(patient == null)
         {
             TempData["MessageError"] = $"Tutor com ID {id} não existe.";
-            return RedirectToAction("Update", new{ id = id });
+            return RedirectToAction("Update");
+        }
+
+        if(_context.Tutors.Find(patient.TutorId) == null)
+        {
+            TempData["MessageError"] = $"Tutor com ID {id} não existe.";
+            return RedirectToAction("Update");
         }
 
         patient.Name = name;
