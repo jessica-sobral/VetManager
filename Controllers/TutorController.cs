@@ -92,13 +92,19 @@ public class TutorController : Controller
         if(_context.Addresses.Find(tutor.AddressId) == null)
         {
             TempData["MessageError"] = $"Endereço com ID {tutor.Id} não existe.";
-            return RedirectToAction("Update", new{ id = id });
+            return RedirectToAction("Create");
         }
 
         if(tutor == null)
         {
             TempData["MessageError"] = $"Tutor com ID {id} não existe.";
-            return RedirectToAction("Update", new{ id = id });
+            return RedirectToAction("Update");
+        }
+
+        if(_context.Addresses.Find(tutor.AddressId) == null)
+        {
+            TempData["MessageError"] = $"Endereço com ID {id} não existe.";
+            return RedirectToAction("Update");
         }
 
         tutor.Name = name;
@@ -121,15 +127,6 @@ public class TutorController : Controller
         {
             TempData["MessageError"] = $"Tutor com ID {id} não existe.";
             return RedirectToAction("Index");
-        }
-
-        foreach(var patient in _context.Patients)
-        {
-            if(patient.TutorId == tutor.Id)
-            {
-                TempData["MessageError"] = $"Tutor com ID {id} pertence a algum paciente.";
-                return RedirectToAction("Index");
-            }
         }
 
         _context.Tutors.Remove(tutor);

@@ -97,15 +97,6 @@ public class AddressController : Controller
             }
         }
 
-        foreach(var tutor in _context.Tutors)
-        {
-            if(tutor.AddressId == address.Id)
-            {
-                TempData["MessageError"] = $"Endereço com ID {id} pertence a algum tutor de um paciente.";
-                return RedirectToAction("Index");
-            }
-        }
-
         _context.Addresses.Remove(address);
         _context.SaveChanges();
 

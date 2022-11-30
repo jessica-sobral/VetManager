@@ -55,7 +55,7 @@ public class HospitalController : Controller
 
         if(_context.Addresses.Find(hospital.AddressId) == null)
         {
-            TempData["MessageError"] = $"Endereço com ID {hospital.AddressId} não existe.";
+            TempData["MessageError"] = $"Endereço com ID {hospital.Id} não existe.";
             return RedirectToAction("Create");
         }
 
@@ -90,16 +90,22 @@ public class HospitalController : Controller
     {
         Hospital hospital = _context.Hospitals.Find(id);
 
-        if(_context.Addresses.Find(addressId) == null)
+        if(_context.Addresses.Find(hospital.AddressId) == null)
         {
-            TempData["MessageError"] = $"Endereço com ID {addressId} não existe.";
-            return RedirectToAction("Update", new { id = id });
+            TempData["MessageError"] = $"Endereço com ID {hospital.Id} não existe.";
+            return RedirectToAction("Create");
         }
 
         if(hospital == null)
         {
             TempData["MessageError"] = $"Hospital com ID {id} não existe.";
-            return RedirectToAction("Update", new { id = id });
+            return RedirectToAction("Update");
+        }
+
+        if(_context.Addresses.Find(hospital.AddressId) == null)
+        {
+            TempData["MessageError"] = $"Endereço com ID {id} não existe.";
+            return RedirectToAction("Update");
         }
 
         hospital.Name = name;

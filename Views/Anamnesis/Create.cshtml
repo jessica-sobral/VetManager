@@ -1,0 +1,39 @@
+@{
+    ViewData["Title"] = "Cadastrar anamnese";
+}
+
+<h1 class="mb-3">@ViewData["Title"]</h1>
+<p class="mb-4">Utilize o formulário abaixo para cadastrar a anamnese.</p>
+
+<form action="/Anamnesis/Add" method="post" class="row g-3">
+    <div class="col-md-2">
+        <label for="id" class="form-label">ID</label>
+        <input type="text" class="form-control" name="id" id="id" required>
+    </div>
+    <div class="col-md-10">
+        <label for="patientId" class="form-label">Paciente Id</label>
+        <input type="text" class="form-control" name="patientId" id="patientId" required>
+    </div>
+    <div class="col-md-5">
+        <label for="symptoms" class="form-label">Sintomas</label>
+        <input type="text" class="form-control" name="symptoms" id="symptoms" required>
+    </div>
+    <div class="col-md-5">
+        <label for="diagnosis" class="form-label">Diagnóstico</label>
+        <input type="text" class="form-control" name="diagnosis" id="diagnosis" required>
+    </div>
+    <div class="col-md-5">
+        <label for="observations" class="form-label">Observações</label>
+        <input type="text" class="form-control" name="observations" id="observations" required>
+    </div>
+    <div class="col-12 mt-4">
+        <button type="submit" class="btn btn-outline-dark">Salvar</button>
+    </div>
+</form>
+
+@if(TempData["MessageError"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show mt-4" role="alert">
+        @TempData["MessageError"]<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}

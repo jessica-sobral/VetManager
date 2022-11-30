@@ -1,13 +1,13 @@
-@model VetManager.Models.Tutor
+@model VetManager.Models.Doctor
 
 @{
-    ViewData["Title"] = $"Atualizar tutor {@Model.Id}";
+    ViewData["Title"] = $"Atualizar doutor {@Model.Id}";
 }
 
 <h1 class="mb-3">@ViewData["Title"]</h1>
-<p class="mb-4">Utilize o formulário abaixo para atualizar o tutor @Model.Id.</p>
+<p class="mb-4">Utilize o formulário abaixo para atualizar o doutor @Model.Id.</p>
 
-<form action="/Tutor/Save" method="post" class="row g-3">
+<form action="/Doctor/Save" method="post" class="row g-3">
     <div class="col-md-2">
         <label for="id" class="form-label">ID</label>
         <input type="text" class="form-control" name="id" id="id" value="@Model.Id" readonly>
@@ -15,6 +15,10 @@
     <div class="col-md-3">
         <label for="name" class="form-label">Nome</label>
         <input type="text" class="form-control" name="name" id="name" value="@Model.Name" required>
+    </div>
+    <div class="col-md-5">
+        <label for="speciality" class="form-label">ESpecialidade</label>
+        <input type="text" class="form-control" name="speciality" id="speciality" value="@Model.Speciality" required>
     </div>
     <div class="col-md-5">
         <label for="cpf" class="form-label">CPF</label>
@@ -32,3 +36,10 @@
         <button type="submit" class="btn btn-outline-dark">Salvar</button>
     </div>
 </form>
+
+@if(TempData["MessageError"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show mt-4" role="alert">
+        @TempData["MessageError"]<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
