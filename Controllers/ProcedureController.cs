@@ -39,34 +39,52 @@ public class ProcedureController : Controller
         return View(procedure);
     }
 
-    // public IActionResult Create()
-    // {
-    //     return View();
-    // }
+    public IActionResult Create()
+    {
+        return View();
+    }
 
-    // [HttpPost]
-    // public IActionResult Add([FromForm] int id, [FromForm] string name, [FromForm] string telephone1, [FromForm] string telephone2, [FromForm] int addressId)
-    // {
-    //     Hospital hospital = new Hospital(id, name, telephone1, telephone2, addressId);
+    [HttpPost]
+    public IActionResult Add([FromForm] int id, [FromForm] int patientId, [FromForm] int doctorId, [FromForm] int hospitalId, [FromForm] string dateTime, [FromForm] string type, [FromForm] string description)
+    {
+        var day = Int32.Parse(dateTime.Substring(8, 2));
+        var month = Int32.Parse(dateTime.Substring(5, 2));
+        var year = Int32.Parse(dateTime.Substring(0, 4));
+        var hour = Int32.Parse(dateTime.Substring(11, 2));
+        var minute = Int32.Parse(dateTime.Substring(14, 2));
 
-    //     if(_context.Addresses.Find(hospital.AddressId) == null)
-    //     {
-    //         TempData["MessageError"] = $"Endereço com ID {hospital.Id} não existe.";
-    //         return RedirectToAction("Create");
-    //     }
+        Procedure procedure = new Procedure(id, patientId, doctorId, hospitalId, new DateTime(year, month, day, hour, minute, 0), type, description);
 
-    //     if(_context.Procedures.Find(hospital.Id) != null)
-    //     {
-    //         TempData["MessageError"] = $"Hospital com ID {hospital.Id} já existe.";
-    //         return RedirectToAction("Create");
-    //     }
+        if(_context.Patients.Find(procedure.PatientId) == null)
+        {
+            TempData["MessageError"] = $"Paciente com ID {procedure.PatientId} não existe.";
+            return RedirectToAction("Create");
+        }
+
+        if(_context.Doctors.Find(procedure.DoctorId) == null)
+        {
+            TempData["MessageError"] = $"Médico com ID {procedure.DoctorId} não existe.";
+            return RedirectToAction("Create");
+        }
+
+        if(_context.Hospitals.Find(procedure.HospitalId) == null)
+        {
+            TempData["MessageError"] = $"Hospital com ID {procedure.HospitalId} não existe.";
+            return RedirectToAction("Create");
+        }
+
+        if(_context.Procedures.Find(procedure.Id) != null)
+        {
+            TempData["MessageError"] = $"Procedimento com ID {procedure.Id} já existe.";
+            return RedirectToAction("Create");
+        }
         
-    //     _context.Procedures.Add(hospital);
-    //     _context.SaveChanges();
+        _context.Procedures.Add(procedure);
+        _context.SaveChanges();
 
-    //     TempData["MessageSuccess"] = $"Hospital com ID {hospital.Id} cadastrado com sucesso.";
-    //     return RedirectToAction("Show", new { id = id });
-    // }
+        TempData["MessageSuccess"] = $"Procedimento com ID {procedure.Id} cadastrado com sucesso.";
+        return RedirectToAction("Show", new { id = id });
+    }
 
     // public IActionResult Update(int id)
     // {
