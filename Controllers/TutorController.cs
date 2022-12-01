@@ -28,17 +28,7 @@ public class TutorController : Controller
             return RedirectToAction("Index");
         }
 
-        Address address = _context.Addresses.Find(tutor.AddressId);
-
-        ViewData["Address"] = new Address(
-            address.Id,
-            address.ZipCode,
-            address.Street,
-            address.Number,
-            address.District,
-            address.City,
-            address.State
-        );
+        ViewData["Address"] = _context.Addresses.Find(tutor.AddressId);
 
         return View(tutor);
     }
@@ -51,6 +41,12 @@ public class TutorController : Controller
     [HttpPost]
     public IActionResult Add([FromForm] int id, [FromForm] string name, [FromForm] string cpf, [FromForm] int addressId, [FromForm] string telephone)
     {
+        if(id <= 0)
+        {
+            TempData["MessageError"] = $"O ID deve ser um número inteiro positivo.";
+            return RedirectToAction("Create");
+        }
+        
         try
         {
             if(cpf.Length != 11) throw new FormatException();
@@ -75,6 +71,15 @@ public class TutorController : Controller
         {
             TempData["MessageError"] = $"Tutor com ID {tutor.Id} já existe.";
             return RedirectToAction("Create");
+        }
+
+        foreach(var tut in _context.Tutors)
+        {
+            if(tut.Cpf == tutor.Cpf)
+            {
+                TempData["MessageError"] = $"CPF já cadastrado.";
+                return RedirectToAction("Create");
+            }
         }
         
         _context.Tutors.Add(tutor);

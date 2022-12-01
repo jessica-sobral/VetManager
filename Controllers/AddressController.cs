@@ -25,6 +25,12 @@ public class AddressController : Controller
     [HttpPost]
     public IActionResult Add([FromForm] int id, [FromForm] string zipCode, [FromForm] string street, [FromForm] string number, [FromForm] string district, [FromForm] string city, [FromForm] string state)
     {
+        if(id <= 0)
+        {
+            TempData["MessageError"] = $"O ID deve ser um número inteiro positivo.";
+            return RedirectToAction("Create");
+        }
+        
         try
         {
             if(zipCode.Length != 8) throw new FormatException();

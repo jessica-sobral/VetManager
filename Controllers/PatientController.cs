@@ -27,15 +27,7 @@ public class PatientController : Controller
             return RedirectToAction("Index");
         }
 
-        Tutor tutor = _context.Tutors.Find(patient.TutorId);
-
-        ViewData["Tutor"] = new Tutor(
-            tutor.Id,
-            tutor.Name,
-            tutor.Cpf,
-            tutor.AddressId,
-            tutor.Telephone
-        );
+        ViewData["Tutor"] = _context.Tutors.Find(patient.TutorId);
 
         return View(patient);
     }
@@ -51,8 +43,21 @@ public class PatientController : Controller
         var day = Int32.Parse(birthDate.Substring(8, 2));
         var month = Int32.Parse(birthDate.Substring(5, 2));
         var year = Int32.Parse(birthDate.Substring(0, 4));
+        var date = new DateTime(year, month, day);
 
-        Patient patient = new Patient(id, name, new DateTime(year, month, day), species, bloodType, tutorId);
+        if(id <= 0)
+        {
+            TempData["MessageError"] = $"O ID deve ser um número inteiro positivo.";
+            return RedirectToAction("Create");
+        }
+
+        if(DateTime.Compare(date, DateTime.Now) > 0)
+        {
+            TempData["MessageError"] = $"A data deve ser maior que ou igual a data de hoje.";
+            return RedirectToAction("Create");
+        }
+
+        Patient patient = new Patient(id, name, date, species, bloodType, tutorId);
 
         if(_context.Tutors.Find(patient.TutorId) == null)
         {
@@ -112,6 +117,13 @@ public class PatientController : Controller
         var day = Int32.Parse(birthDate.Substring(8, 2));
         var month = Int32.Parse(birthDate.Substring(5, 2));
         var year = Int32.Parse(birthDate.Substring(0, 4));
+        var date = new DateTime(year, month, day);
+
+        if(DateTime.Compare(date, DateTime.Now) > 0)
+        {
+            TempData["MessageError"] = $"A data deve ser menor que ou igual a data de hoje.";
+            return RedirectToAction("Create");
+        }
 
         patient.Name = name;
         patient.BirthDate = new DateTime(year, month, day);

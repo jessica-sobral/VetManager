@@ -27,16 +27,7 @@ public class AnamnesisController : Controller
             return RedirectToAction("Index");
         }
 
-        Patient patient = _context.Patients.Find(anamnesis.PatientId);
-
-        ViewData["Patient"] = new Patient(
-            patient.Id,
-            patient.Name,
-            patient.BirthDate,
-            patient.Species,
-            patient.BloodType,
-            patient.TutorId
-        );
+        ViewData["Patient"] = _context.Patients.Find(anamnesis.PatientId);
 
         return View(anamnesis);
     }
@@ -49,6 +40,12 @@ public class AnamnesisController : Controller
     [HttpPost]
     public IActionResult Add([FromForm] int id, [FromForm] int patientId, [FromForm] string symptoms, [FromForm] string diagnosis, [FromForm] string observations)
     {
+        if(id <= 0)
+        {
+            TempData["MessageError"] = $"O ID deve ser um número inteiro positivo.";
+            return RedirectToAction("Create");
+        }
+        
         Anamnesis anamnesis = new Anamnesis(id, patientId, symptoms, diagnosis, observations);
 
         if(_context.Patients.Find(anamnesis.PatientId) == null)

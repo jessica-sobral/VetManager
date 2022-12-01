@@ -28,17 +28,7 @@ public class HospitalController : Controller
             return RedirectToAction("Index");
         }
 
-        Address address = _context.Addresses.Find(hospital.AddressId);
-
-        ViewData["Address"] = new Address(
-            address.Id,
-            address.ZipCode,
-            address.Street,
-            address.Number,
-            address.District,
-            address.City,
-            address.State
-        );
+        ViewData["Address"] = _context.Addresses.Find(hospital.AddressId);
 
         return View(hospital);
     }
@@ -51,6 +41,12 @@ public class HospitalController : Controller
     [HttpPost]
     public IActionResult Add([FromForm] int id, [FromForm] string name, [FromForm] string telephone1, [FromForm] string telephone2, [FromForm] int addressId)
     {
+        if(id <= 0)
+        {
+            TempData["MessageError"] = $"O ID deve ser um número inteiro positivo.";
+            return RedirectToAction("Create");
+        }
+        
         Hospital hospital = new Hospital(id, name, telephone1, telephone2, addressId);
 
         if(_context.Addresses.Find(hospital.AddressId) == null)

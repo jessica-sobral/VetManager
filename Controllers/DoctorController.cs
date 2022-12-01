@@ -41,6 +41,12 @@ public class DoctorController : Controller
     [HttpPost]
     public IActionResult Add([FromForm] int id, [FromForm] string name, [FromForm] string speciality, [FromForm] string cpf, [FromForm] int addressId, [FromForm] string telephone)
     {
+        if(id <= 0)
+        {
+            TempData["MessageError"] = $"O ID deve ser um número inteiro positivo.";
+            return RedirectToAction("Create");
+        }
+
         try
         {
             if(cpf.Length != 11) throw new FormatException();
@@ -65,6 +71,15 @@ public class DoctorController : Controller
         {
             TempData["MessageError"] = $"Doutor com ID {id} já existe.";
             return RedirectToAction("Create");
+        }
+
+        foreach(var doc in _context.Doctors)
+        {
+            if(doc.Cpf == doctor.Cpf)
+            {
+                TempData["MessageError"] = $"CPF já cadastrado.";
+                return RedirectToAction("Create");
+            }
         }
         
         _context.Doctors.Add(doctor);
@@ -114,6 +129,15 @@ public class DoctorController : Controller
         {
             TempData["MessageError"] = $"Doutor com ID {id} não existe.";
             return RedirectToAction("Update", new { id = id });
+        }
+
+        foreach(var doc in _context.Doctors)
+        {
+            if(doc.Cpf == doctor.Cpf && doc.Id != doctor.Id)
+            {
+                TempData["MessageError"] = $"CPF já cadastrado.";
+                return RedirectToAction("Create");
+            }
         }
 
         doctor.Name = name;

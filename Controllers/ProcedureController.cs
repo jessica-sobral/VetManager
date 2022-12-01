@@ -43,13 +43,26 @@ public class ProcedureController : Controller
     [HttpPost]
     public IActionResult Add([FromForm] int id, [FromForm] int patientId, [FromForm] int doctorId, [FromForm] int hospitalId, [FromForm] string dateTime, [FromForm] string type, [FromForm] string description)
     {
+        if(id <= 0)
+        {
+            TempData["MessageError"] = $"O ID deve ser um número inteiro positivo.";
+            return RedirectToAction("Create");
+        }
+        
         var day = Int32.Parse(dateTime.Substring(8, 2));
         var month = Int32.Parse(dateTime.Substring(5, 2));
         var year = Int32.Parse(dateTime.Substring(0, 4));
         var hour = Int32.Parse(dateTime.Substring(11, 2));
         var minute = Int32.Parse(dateTime.Substring(14, 2));
+        var date = new DateTime(year, month, day, hour, minute, 0);
 
-        Procedure procedure = new Procedure(id, patientId, doctorId, hospitalId, new DateTime(year, month, day, hour, minute, 0), type, description);
+        if(DateTime.Compare(date, DateTime.Now) > 0)
+        {
+            TempData["MessageError"] = $"A data e hora deve ser menor que ou igual a data e hora de agora.";
+            return RedirectToAction("Create");
+        }
+
+        Procedure procedure = new Procedure(id, patientId, doctorId, hospitalId, date, type, description);
 
         if(_context.Patients.Find(procedure.PatientId) == null)
         {
@@ -117,12 +130,20 @@ public class ProcedureController : Controller
             TempData["MessageError"] = $"Hospital com ID {procedure.HospitalId} não existe.";
             return RedirectToAction("Create");
         }
+        
 
         var day = Int32.Parse(dateTime.Substring(8, 2));
         var month = Int32.Parse(dateTime.Substring(5, 2));
         var year = Int32.Parse(dateTime.Substring(0, 4));
         var hour = Int32.Parse(dateTime.Substring(11, 2));
         var minute = Int32.Parse(dateTime.Substring(14, 2));
+        var date = new DateTime(year, month, day, hour, minute, 0);
+
+        if(DateTime.Compare(date, DateTime.Now) > 0)
+        {
+            TempData["MessageError"] = $"A data e hora deve ser menor que ou igual a data e hora de agora.";
+            return RedirectToAction("Create");
+        }
 
         procedure.PatientId = patientId;
         procedure.DoctorId = doctorId;
