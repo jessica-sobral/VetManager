@@ -106,7 +106,7 @@ public class DoctorController : Controller
 
         if(_context.Addresses.Find(addressId) == null)
         {
-            TempData["MessageError"] = $"Endereço com ID {addressId} não existe.";
+            TempData["MessageError"] = $"Médico com ID {addressId} não existe.";
             return RedirectToAction("Update", new { id = id });
         }
 
@@ -125,7 +125,7 @@ public class DoctorController : Controller
         _context.Doctors.Update(doctor);
         _context.SaveChanges();
 
-        TempData["MessageSuccess"] = $"Doutor com ID {id} atualizado com sucesso.";
+        TempData["MessageSuccess"] = $"Médico com ID {id} atualizado com sucesso.";
         return RedirectToAction("Show", new { id = id });
     }
 
@@ -135,14 +135,23 @@ public class DoctorController : Controller
 
         if(doctor == null)
         {
-            TempData["MessageError"] = $"Doutor com ID {id} não existe.";
+            TempData["MessageError"] = $"Médico com ID {id} não existe.";
             return RedirectToAction("Index");
+        }
+
+        foreach (var procedure in _context.Procedures)
+        {
+            if(procedure.DoctorId == doctor.Id)
+            {
+                TempData["MessageError"] = $"Médico com ID {id} tem procedimento(s).";
+                return RedirectToAction("Index");
+            }
         }
 
         _context.Doctors.Remove(doctor);
         _context.SaveChanges();
 
-        TempData["MessageSuccess"] = $"Doutor com ID {id} removido com sucesso.";
+        TempData["MessageSuccess"] = $"Médico com ID {id} removido com sucesso.";
         return RedirectToAction("Index");
     }
 } 

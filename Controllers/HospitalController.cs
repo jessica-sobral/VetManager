@@ -130,6 +130,15 @@ public class HospitalController : Controller
             return RedirectToAction("Index");
         }
 
+        foreach (var procedure in _context.Procedures)
+        {
+            if(procedure.HospitalId == hospital.Id)
+            {
+                TempData["MessageError"] = $"Hospital com ID {id} tem procedimento(s).";
+                return RedirectToAction("Index");
+            }
+        }
+
         _context.Hospitals.Remove(hospital);
         _context.SaveChanges();
 

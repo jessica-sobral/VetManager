@@ -136,6 +136,15 @@ public class PatientController : Controller
             return RedirectToAction("Index");
         }
 
+        foreach (var procedure in _context.Procedures)
+        {
+            if(procedure.PatientId == patient.Id)
+            {
+                TempData["MessageError"] = $"Paciente com ID {id} tem procedimento(s).";
+                return RedirectToAction("Index");
+            }
+        }
+
         _context.Patients.Remove(patient);
         _context.SaveChanges();
 

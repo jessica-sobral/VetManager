@@ -154,6 +154,15 @@ public class TutorController : Controller
             return RedirectToAction("Index");
         }
 
+        foreach (var patient in _context.Patients)
+        {
+            if(patient.TutorId == tutor.Id)
+            {
+                TempData["MessageError"] = $"Tutor com ID {id} possui paciente.";
+                return RedirectToAction("Index");
+            }
+        }
+
         _context.Tutors.Remove(tutor);
         _context.SaveChanges();
 

@@ -121,6 +121,24 @@ public class AddressController : Controller
             }
         }
 
+        foreach(var doctor in _context.Doctors)
+        {
+            if(doctor.AddressId == address.Id)
+            {
+                TempData["MessageError"] = $"Endereço com ID {id} pertence a algum médico.";
+                return RedirectToAction("Index");
+            }
+        }
+
+        foreach(var tutor in _context.Tutors)
+        {
+            if(tutor.AddressId == address.Id)
+            {
+                TempData["MessageError"] = $"Endereço com ID {id} pertence a algum paciente.";
+                return RedirectToAction("Index");
+            }
+        }
+
         _context.Addresses.Remove(address);
         _context.SaveChanges();
 
