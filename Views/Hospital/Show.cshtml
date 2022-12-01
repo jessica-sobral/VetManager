@@ -11,8 +11,9 @@
 
 <p><strong>ID:</strong> @Model.Id</p>
 <p><strong>Nome da unidade:</strong> @Model.Name</p>
-<p><strong>Telefones:</strong> @Model.Telephone1, @Model.Telephone2</p>
-<p><strong>Endereço:</strong> @address.Street, @address.Number - @address.District, @address.City - @address.ZipCode.</p>
+<p><strong>Telefone 1:</strong> @Model.Telephone1</p>
+<p><strong>Telefone 2:</strong> @Model.Telephone2</p>
+<p><strong>Endereço:</strong> @address.Street, @address.Number - @address.District, @address.City - CEP: @address.FormattedZipCode.</p>
 <p><strong>ID do endereço:</strong> @Model.AddressId</p>
 
 <a href="/Hospital/Update/@Model.Id" class="btn btn-outline-primary mt-2">

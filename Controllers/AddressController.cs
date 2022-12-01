@@ -25,6 +25,18 @@ public class AddressController : Controller
     [HttpPost]
     public IActionResult Add([FromForm] int id, [FromForm] string zipCode, [FromForm] string street, [FromForm] string number, [FromForm] string district, [FromForm] string city, [FromForm] string state)
     {
+        try
+        {
+            if(zipCode.Length != 8) throw new FormatException();
+            
+            int bg = int.Parse(zipCode);
+        }
+        catch(FormatException)
+        {
+            TempData["MessageError"] = $"O CEP deve ser digitado apenas em números e sem qualquer tipo de pontuação.";
+            return RedirectToAction("Create");
+        }
+
         Address address = new Address(id, zipCode, street, number, district, city, state);
 
         if(_context.Addresses.Find(address.Id) != null)
@@ -56,6 +68,18 @@ public class AddressController : Controller
     [HttpPost]
     public IActionResult Save([FromForm] int id, [FromForm] string zipCode, [FromForm] string street, [FromForm] string number, [FromForm] string district, [FromForm] string city, [FromForm] string state)
     {
+        try
+        {
+            if(zipCode.Length != 8) throw new FormatException();
+            
+            int bg = int.Parse(zipCode);
+        }
+        catch(FormatException)
+        {
+            TempData["MessageError"] = $"O CEP deve ser digitado apenas em números e sem qualquer tipo de pontuação.";
+            return RedirectToAction("Create");
+        }
+
         Address address = _context.Addresses.Find(id);
 
         if(address == null)

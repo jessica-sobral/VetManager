@@ -1,3 +1,4 @@
+using System.Numerics;
 using Microsoft.AspNetCore.Mvc;
 using VetManager.Models;
 
@@ -50,6 +51,18 @@ public class DoctorController : Controller
     [HttpPost]
     public IActionResult Add([FromForm] int id, [FromForm] string name, [FromForm] string speciality, [FromForm] string cpf, [FromForm] int addressId, [FromForm] string telephone)
     {
+        try
+        {
+            if(cpf.Length != 11) throw new FormatException();
+            
+            BigInteger bg = BigInteger.Parse(cpf);
+        }
+        catch(FormatException)
+        {
+            TempData["MessageError"] = $"O CPF deve ser digitado apenas em números e sem qualquer tipo de pontuação.";
+            return RedirectToAction("Create");
+        }
+
         Doctor doctor = new Doctor(id, name, speciality, cpf, addressId, telephone);
 
         if(_context.Addresses.Find(addressId) == null)
@@ -87,6 +100,18 @@ public class DoctorController : Controller
     [HttpPost]
     public IActionResult Save([FromForm] int id, [FromForm] string name, [FromForm] string speciality, [FromForm] string cpf, [FromForm] int addressId, [FromForm] string telephone)
     {
+        try
+        {
+            if(cpf.Length != 11) throw new FormatException();
+            
+            BigInteger bg = BigInteger.Parse(cpf);
+        }
+        catch(FormatException)
+        {
+            TempData["MessageError"] = $"O CPF deve ser digitado apenas em números e sem qualquer tipo de pontuação.";
+            return RedirectToAction("Create");
+        }
+        
         Doctor doctor = _context.Doctors.Find(id);
 
         if(_context.Addresses.Find(addressId) == null)

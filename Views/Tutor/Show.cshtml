@@ -11,9 +11,9 @@
 
 <p><strong>ID:</strong> @Model.Id</p>
 <p><strong>Nome do tutor:</strong> @Model.Name</p>
-<p><strong>CPF:</strong> @Model.Cpf</p>
+<p><strong>CPF:</strong> @Model.FormattedCpf</p>
 <p><strong>Telefone:</strong> @Model.Telephone</p>
-<p><strong>Endereço:</strong> @address.Street, @address.Number - @address.District, @address.City - @address.ZipCode.</p>
+<p><strong>Endereço:</strong> @address.Street, @address.Number - @address.District, @address.City - CEP: @address.FormattedZipCode.</p>
 <p><strong>ID do endereço:</strong> @Model.AddressId</p>
 
 <a href="/Tutor/Update/@Model.Id" class="btn btn-outline-primary mt-2">

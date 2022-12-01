@@ -1,3 +1,4 @@
+using System.Numerics;
 using Microsoft.AspNetCore.Mvc;
 using VetManager.Models;
 
@@ -50,6 +51,18 @@ public class TutorController : Controller
     [HttpPost]
     public IActionResult Add([FromForm] int id, [FromForm] string name, [FromForm] string cpf, [FromForm] int addressId, [FromForm] string telephone)
     {
+        try
+        {
+            if(cpf.Length != 11) throw new FormatException();
+            
+            BigInteger bg = BigInteger.Parse(cpf);
+        }
+        catch(FormatException)
+        {
+            TempData["MessageError"] = $"O CPF deve ser digitado apenas em números e sem qualquer tipo de pontuação.";
+            return RedirectToAction("Create");
+        }
+        
         Tutor tutor = new Tutor(id, name, cpf, addressId, telephone);
 
         if(_context.Addresses.Find(tutor.AddressId) == null)
@@ -87,6 +100,18 @@ public class TutorController : Controller
     [HttpPost]
     public IActionResult Save([FromForm] int id, [FromForm] string name, [FromForm] string cpf, [FromForm] int addressId, [FromForm] string telephone)
     {
+        try
+        {
+            if(cpf.Length != 11) throw new FormatException();
+            
+            BigInteger bg = BigInteger.Parse(cpf);
+        }
+        catch(FormatException)
+        {
+            TempData["MessageError"] = $"O CPF deve ser digitado apenas em números e sem qualquer tipo de pontuação.";
+            return RedirectToAction("Create");
+        }
+        
         Tutor tutor = _context.Tutors.Find(id);
 
         if(_context.Addresses.Find(tutor.AddressId) == null)

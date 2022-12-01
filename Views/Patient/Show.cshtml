@@ -1,7 +1,7 @@
 @model VetManager.Models.Patient
 
 @{
-    ViewData["Title"] = $"Patient {Model.Name}";
+    ViewData["Title"] = $"Paciente {Model.Name}";
    var tutor = ViewData["Tutor"] as Tutor;
 }
 
@@ -15,7 +15,7 @@
 <p><strong>Idade:</strong> @Model.GetAge()</p>
 <p><strong>Espécie:</strong> @Model.Species</p>
 <p><strong>Tipo sanguíneo:</strong> @Model.BloodType</p>
-<p><strong>Tutor:</strong> @tutor.Name | CPF: @tutor.Cpf | Telefone: @tutor.Telephone | ID do endereço: @tutor.AddressId</p>
+<p><strong>Tutor:</strong> @tutor.Name | CPF: @tutor.FormattedCpf | Telefone: @tutor.Telephone | ID do endereço: @tutor.AddressId</p>
 <p><strong>ID do tutor:</strong> @Model.TutorId</p>
 
 
