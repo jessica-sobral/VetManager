@@ -28,17 +28,7 @@ public class DoctorController : Controller
             return RedirectToAction("Index");
         }
 
-        Address address = _context.Addresses.Find(doctor.AddressId);
-
-        ViewData["Address"] = new Address(
-            address.Id,
-            address.ZipCode,
-            address.Street,
-            address.Number,
-            address.District,
-            address.City,
-            address.State
-        );
+        ViewData["Address"] = _context.Addresses.Find(doctor.AddressId);
 
         return View(doctor);
     }

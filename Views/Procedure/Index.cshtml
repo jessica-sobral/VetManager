@@ -1,73 +1,73 @@
 @model IEnumerable<VetManager.Models.Procedure>
 
-    @{
-        ViewData["Title"] = "Procedimentos";
-    }
-    
-    <h1 class="mb-4">@ViewData["Title"]</h1>
-    
-    <a href="/Procedure/Create" class="btn btn-success mb-3">
-        Cadastrar procedimento
-    </a>
-    
-    @if (Model.Count() == 0)
-    {
-        <p>Nenhum procedimento cadastrado.</p>
-    }
-    else
-    {
-        <table class="table">
-            <thead>
+@{
+    ViewData["Title"] = "Procedimentos";
+}
+
+<h1 class="mb-4">@ViewData["Title"]</h1>
+
+<a href="/Procedure/Create" class="btn btn-success mb-3">
+    Cadastrar procedimento
+</a>
+
+@if (Model.Count() == 0)
+{
+    <p>Nenhum procedimento cadastrado.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">ID do paciente</th>
+                <th scope="col">Data e hora</th>
+                <th scope="col">Tipo</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody class="table-group-divider">
+            @foreach (var procedure in Model)
+            {
                 <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">ID do paciente</th>
-                    <th scope="col">Data e hora</th>
-                    <th scope="col">Tipo</th>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
+                    <th scope="row">@procedure.Id</th>
+                    <td>@procedure.PatientId</td>
+                    <td>@procedure.DateTime</td>
+                    <td>@procedure.Type</td>
+                    <td>
+                        <a href="/Procedure/Show/@procedure.Id" class="btn btn-outline-dark">
+                            Detalhes
+                        </a>
+                    </td>
+                    <td>
+                        <a href="/Procedure/Update/@procedure.Id" class="btn btn-outline-primary">
+                            Atualizar
+                        </a>
+                    </td>
+                    <td>
+                        <a href="/Procedure/Delete/@procedure.Id" class="btn btn-danger">
+                            Remover
+                        </a>
+                    </td>
                 </tr>
-            </thead>
-            <tbody class="table-group-divider">
-                @foreach (var procedure in Model)
-                {
-                    <tr>
-                        <th scope="row">@procedure.Id</th>
-                        <td>@procedure.PatientId</td>
-                        <td>@procedure.HospitalId</td>
-                        <td>@procedure.DateTime</td>
-                        <td>
-                            <a href="/Procedure/Show/@procedure.Id" class="btn btn-outline-dark">
-                                Detalhes
-                            </a>
-                        </td>
-                        <td>
-                            <a href="/Procedure/Update/@procedure.Id" class="btn btn-outline-primary">
-                                Atualizar
-                            </a>
-                        </td>
-                        <td>
-                            <a href="/Procedure/Delete/@procedure.Id" class="btn btn-danger">
-                                Remover
-                            </a>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    }
-    
-    @if (TempData["MessageSuccess"] != null)
-    {
-        <div class="alert alert-success alert-dismissible fade show mt-4" role="alert">
-            @TempData["MessageSuccess"]<button type="button" class="btn-close" data-bs-dismiss="alert"
-            aria-label="Close"></button>
-        </div>
-    }
-    @if (TempData["MessageError"] != null)
-    {
-        <div class="alert alert-danger alert-dismissible fade show mt-4" role="alert">
-            @TempData["MessageError"]<button type="button" class="btn-close" data-bs-dismiss="alert"
-            aria-label="Close"></button>
-        </div>
-    }
+            }
+        </tbody>
+    </table>
+}
+
+@if (TempData["MessageSuccess"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show mt-4" role="alert">
+        @TempData["MessageSuccess"]<button type="button" class="btn-close" data-bs-dismiss="alert"
+        aria-label="Close"></button>
+    </div>
+}
+@if (TempData["MessageError"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show mt-4" role="alert">
+        @TempData["MessageError"]<button type="button" class="btn-close" data-bs-dismiss="alert"
+        aria-label="Close"></button>
+    </div>
+}

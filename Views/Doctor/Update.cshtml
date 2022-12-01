@@ -1,11 +1,13 @@
 @model VetManager.Models.Doctor
 
 @{
-    ViewData["Title"] = $"Atualizar doutor {@Model.Id}";
+    ViewData["Title"] = $"Atualizar médico {@Model.Id}";
 }
 
+<a href="/Doctor/Index" class="btn btn-light">< Voltar</a>
+
 <h1 class="mb-3">@ViewData["Title"]</h1>
-<p class="mb-4">Utilize o formulário abaixo para atualizar o doutor @Model.Id.</p>
+<p class="mb-4">Utilize o formulário abaixo para atualizar o médico @Model.Id.</p>
 
 <form action="/Doctor/Save" method="post" class="row g-3">
     <div class="col-md-2">
