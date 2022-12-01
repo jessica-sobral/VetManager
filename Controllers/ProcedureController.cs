@@ -134,20 +134,20 @@ public class ProcedureController : Controller
     //     return RedirectToAction("Show", new { id = id });
     // }
 
-    // public IActionResult Delete(int id)
-    // {
-    //     Hospital hospital = _context.Procedures.Find(id);
+    public IActionResult Delete(int id)
+    {
+        Procedure procedure = _context.Procedures.Find(id);
 
-    //     if(hospital == null)
-    //     {
-    //         TempData["MessageError"] = $"Hospital com ID {id} não existe.";
-    //         return RedirectToAction("Index");
-    //     }
+        if(procedure == null)
+        {
+            TempData["MessageError"] = $"Procedimento com ID {id} não existe.";
+            return RedirectToAction("Index");
+        }
 
-    //     _context.Procedures.Remove(hospital);
-    //     _context.SaveChanges();
+        _context.Procedures.Remove(procedure);
+        _context.SaveChanges();
 
-    //     TempData["MessageSuccess"] = $"Hospital com ID {id} removido com sucesso.";
-    //     return RedirectToAction("Index");
-    // }
+        TempData["MessageSuccess"] = $"Procedimento com ID {id} removido com sucesso.";
+        return RedirectToAction("Index");
+    }
 }
